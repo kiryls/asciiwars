@@ -3,16 +3,25 @@
 
 int main(int argc, char *argv[]) {
 
-    char *window_title = "Template Project";
+    char *window_title = "Ascii Wars";
     InitWindow(640, 480, window_title);
-
-    char *text = "Hello World";
+    char *text = "@";
     int font_size = 20;
+    int font_space = 0;
+    Vector2 text_pos = {10, 10};
+    Font font = LoadFontEx("resources/FiraCodeNerdFont-Bold.ttf", font_size, 0, 255);
 
-    while (!WindowShouldClose()) {
+    SetTargetFPS(60);
+
+    while (!WindowShouldClose()) { 
+        if (IsKeyDown(KEY_D)) text_pos.x += 2.0f;
+        if (IsKeyDown(KEY_A)) text_pos.x -= 2.0f;
+        if (IsKeyDown(KEY_W)) text_pos.y -= 2.0f;
+        if (IsKeyDown(KEY_S)) text_pos.y += 2.0f;
+
         BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawText(text, GetScreenWidth()/2 - MeasureText(text, font_size)/2, GetScreenHeight()/2 - font_size/2, font_size, DARKGRAY);
+        ClearBackground(DARKGRAY);
+        DrawTextEx(font, text, text_pos, font_size, font_space, RAYWHITE);
         EndDrawing();
     }
 
