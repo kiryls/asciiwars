@@ -1,4 +1,4 @@
-TARGET_EXEC := proj_exec_name
+TARGET_EXEC := asciiwars
 
 BUILD_DIR := ./build
 SRC_DIR := ./src
@@ -30,9 +30,11 @@ run: $(OBJS)
 clean:
 	rm -r $(BUILD_DIR)
 
+f := "."
+m := ""
 git:
-	git add $f 
-	git commit -m "$m" 
+	git add $(f) 
+	git commit -m "$(m)" 
 	git push origin master
 
 -include $(DEPS)
