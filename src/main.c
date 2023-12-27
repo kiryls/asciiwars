@@ -10,6 +10,7 @@ int main(int argc, char *argv[]) {
     int font_size = 20;
     int font_space = 0;
     Vector2 text_pos = {10, 10};
+    float speed = 4;
     Font font = LoadFontEx("resources/FiraCodeNerdFont-Bold.ttf", font_size, 0, 255);
 
     SetTargetFPS(60);
@@ -23,9 +24,13 @@ int main(int argc, char *argv[]) {
 
         dir = Vector2Normalize(dir);
 
+        text_pos = Vector2Add(text_pos, Vector2Scale(dir, speed));
+
+        dir = Vector2Zero();
+
         BeginDrawing();
         ClearBackground(DARKGRAY);
-        DrawTextEx(font, text, dir, font_size, font_space, RAYWHITE);
+        DrawTextEx(font, text, text_pos, font_size, font_space, RAYWHITE);
         EndDrawing();
     }
 
