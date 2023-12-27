@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "include/raylib.h"
+#include "include/raymath.h"
 
 int main(int argc, char *argv[]) {
 
@@ -13,15 +14,18 @@ int main(int argc, char *argv[]) {
 
     SetTargetFPS(60);
 
+    Vector2 dir = {0};
     while (!WindowShouldClose()) { 
-        if (IsKeyDown(KEY_D)) text_pos.x += 2.0f;
-        if (IsKeyDown(KEY_A)) text_pos.x -= 2.0f;
-        if (IsKeyDown(KEY_W)) text_pos.y -= 2.0f;
-        if (IsKeyDown(KEY_S)) text_pos.y += 2.0f;
+        if (IsKeyDown(KEY_D)) dir.x += 1.0f;
+        if (IsKeyDown(KEY_A)) dir.x -= 1.0f;
+        if (IsKeyDown(KEY_W)) dir.y -= 1.0f;
+        if (IsKeyDown(KEY_S)) dir.y += 1.0f;
+
+        dir = Vector2Normalize(dir);
 
         BeginDrawing();
         ClearBackground(DARKGRAY);
-        DrawTextEx(font, text, text_pos, font_size, font_space, RAYWHITE);
+        DrawTextEx(font, text, dir, font_size, font_space, RAYWHITE);
         EndDrawing();
     }
 
