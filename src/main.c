@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
 
     char *window_title = "Ascii Wars";
     InitWindow(SCREEN_W, SCREEN_H, window_title);
-    int font_size = 20;
+    int font_size = CELL_SIZE - 5;
     int font_space = 0;
     Vector2 text_pos = {10, 10};
     float speed = 4;
