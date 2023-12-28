@@ -12,7 +12,6 @@ make
 make run
 ```
 
-## Features
-- [ ] feature1
-- [ ] feature2
-- [ ] feature3
+## Todos
+- [ ] 1: game world with characters in cells
+- [ ] 2: movement on the cells
