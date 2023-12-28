@@ -11,6 +11,26 @@
 #define ROWS (SCREEN_H / CELL_SIZE)
 #define COLS (SCREEN_W / CELL_SIZE)
 
+#define COLORS(C) (GetColor(colors[(C)]))
+
+typedef enum {
+    COLOR_BG = 0,
+    COLOR_TEXT,
+    COLOR_GRID,
+    COLOR_I_ARCHER,
+    COLOR_I_LIGHT,
+    COLOR_I_HEAVY,
+    COLOR_C_KNIGHT,
+    COLOR_C_CHARIOT,
+    COLOR_A_CATAPULT,
+    COLOR_A_SIEGE_TOWER
+} Colors;
+
+unsigned int colors[] = {
+    [COLOR_BG] = 0X222222FF,
+    [COLOR_TEXT] = 0xAAAAAAFF,
+    [COLOR_GRID] = 0x333333FF
+};
 
 typedef enum {
     I_ARCHER = 0,
@@ -53,6 +73,16 @@ static char* avatar[] = {
     [A_SIEGE_TOWER] = "#"
 };
 
+void DrawCells() {
+    for(int i = 0; i < ROWS; ++i) {
+        DrawLine(0, i * CELL_SIZE, SCREEN_W, i * CELL_SIZE, COLORS(COLOR_GRID));
+    }
+
+    for(int i = 0; i < COLS; ++i) {
+        DrawLine(i * CELL_SIZE, 0, i * CELL_SIZE, SCREEN_H, COLORS(COLOR_GRID));
+    }
+}
+
 char *GetAvatar(Unit unit) {
     switch (unit.type) {
         case U_INFANTRY: 
@@ -94,8 +124,11 @@ int main(int argc, char *argv[]) {
         dir = Vector2Zero();
 
         BeginDrawing();
-        ClearBackground(DARKGRAY);
-        DrawTextEx(font, GetAvatar(unit), text_pos, font_size, font_space, foe);
+        ClearBackground(COLORS(COLOR_BG));
+        
+        DrawCells();
+        
+        DrawTextEx(font, GetAvatar(unit), text_pos, font_size, font_space, COLORS(COLOR_TEXT));
         EndDrawing();
     }
 
